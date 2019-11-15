@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name" translatable="false">TestApplication</string>
+
+    <string name="general_error">Hubo un error, por favor vuelva a intentarlo.</string>
+
+    <string name="retry">Reintentar</string>
+
+    <string name="album_name">Nombre del Album</string>
+
+    <string name="photo_content">Photo</string>
+</resources>
