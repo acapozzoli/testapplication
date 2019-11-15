@@ -22,38 +22,38 @@ class AlbumListViewModel : BaseViewModel() {
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
 
-    val errorClickListener = View.OnClickListener { loadPosts() }
+    val errorClickListener = View.OnClickListener { loadAlbums() }
 
     init {
-        loadPosts()
+        loadAlbums()
     }
 
-    private fun loadPosts() {
+    private fun loadAlbums() {
         subscription = albumApi.getAlbums()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrievePostListStart() }
-            .doOnTerminate { onRetrievePostListFinish() }
+            .doOnSubscribe { onRetrieveAlbumListStart() }
+            .doOnTerminate { onRetrieveAlbumListFinish() }
             .subscribe(
-                { result -> onRetrievePostListSuccess(result) },
-                { error -> onRetrievePostListError(error) }
+                { result -> onRetrieveAlbumListSuccess(result) },
+                { error -> onRetrieveAlbumListError(error) }
             )
     }
 
-    private fun onRetrievePostListStart() {
+    private fun onRetrieveAlbumListStart() {
         loadingVisibility.value = View.VISIBLE
         errorMessage.value = null
     }
 
-    private fun onRetrievePostListFinish() {
+    private fun onRetrieveAlbumListFinish() {
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrievePostListSuccess(albumsList: List<Album>) {
+    private fun onRetrieveAlbumListSuccess(albumsList: List<Album>) {
         albumListAdapter.updateAlbumList(albumsList)
     }
 
-    private fun onRetrievePostListError(error: Throwable) {
+    private fun onRetrieveAlbumListError(error: Throwable) {
         errorMessage.value = R.string.general_error
     }
 

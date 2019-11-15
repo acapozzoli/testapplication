@@ -30,28 +30,28 @@ class PhotoListViewModel : BaseViewModel() {
         subscription = albumApi.getPhotos(albumId.toString())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrievePostListStart() }
-            .doOnTerminate { onRetrievePostListFinish() }
+            .doOnSubscribe { onRetrievePhotosListStart() }
+            .doOnTerminate { onRetrievePhotosListFinish() }
             .subscribe(
-                { result -> onRetrievePostListSuccess(result) },
-                { error -> onRetrievePostListError(error) }
+                { result -> onRetrievePhotosListSuccess(result) },
+                { error -> onRetrievePhotosListError(error) }
             )
     }
 
-    private fun onRetrievePostListStart() {
+    private fun onRetrievePhotosListStart() {
         loadingVisibility.value = View.VISIBLE
         errorMessage.value = null
     }
 
-    private fun onRetrievePostListFinish() {
+    private fun onRetrievePhotosListFinish() {
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrievePostListSuccess(photosList: List<Photo>) {
+    private fun onRetrievePhotosListSuccess(photosList: List<Photo>) {
         photosListAdapter.updatePhotosList(photosList)
     }
 
-    private fun onRetrievePostListError(error: Throwable) {
+    private fun onRetrievePhotosListError(error: Throwable) {
         errorMessage.value = R.string.general_error
     }
 

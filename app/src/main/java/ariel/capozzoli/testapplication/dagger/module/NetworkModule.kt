@@ -11,11 +11,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
 object NetworkModule {
-    /**
-     * Provides the Post service implementation.
-     * @param retrofit the Retrofit object used to instantiate the service
-     * @return the Post service implementation.
-     */
     @Provides
     @Reusable
     @JvmStatic
@@ -23,10 +18,6 @@ object NetworkModule {
         return retrofit.create(AlbumsApi::class.java)
     }
 
-    /**
-     * Provides the Retrofit object.
-     * @return the Retrofit object
-     */
     @Provides
     @Reusable
     @JvmStatic
